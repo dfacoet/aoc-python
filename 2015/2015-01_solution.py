@@ -37,5 +37,5 @@ def main(input_string: str) -> None:
 
 
 if __name__ == "__main__":
-    input_string = read_input("input.txt")
+    input_string = read_input("2015-01_input.txt")
     main(input_string)
