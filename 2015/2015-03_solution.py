@@ -21,6 +21,7 @@ def visit(input_string) -> set[tuple[int, int]]:
         visited.append(coordinates)
     return set(visited)
 
+
 def part1(input_string: str) -> int:
     return len(visit(input_string))
 
