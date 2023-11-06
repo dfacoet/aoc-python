@@ -1,6 +1,7 @@
 import operator
-from dataclasses import dataclass
-from typing import Literal
+from collections import defaultdict
+from dataclasses import dataclass, field
+from typing import Any, Callable, Literal
 
 BINARY_OPERATORS = {
     "AND": operator.and_,
@@ -8,9 +9,6 @@ BINARY_OPERATORS = {
     "LSHIFT": operator.lshift,
     "RSHIFT": operator.rshift,
 }
-from collections import defaultdict
-from dataclasses import field
-from typing import Any, Callable
 
 
 @dataclass
