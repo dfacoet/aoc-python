@@ -1,5 +1,7 @@
+import random
 from dataclasses import dataclass
-from functools import cached_property
+
+import numpy as np
 
 INPUT = [
     "Sugar: capacity 3, durability 0, flavor 0, texture -3, calories 2",
@@ -113,27 +115,14 @@ def find_recipe(
     ingredients: Ingredients,
     initial_quantities: dict[str, int],
     verbose: bool = False,
-    kcal: int | None = None,
 ) -> Recipe:
     assert sum(initial_quantities.values()) == 100
     recipe = Recipe(ingredients, initial_quantities)
     max_value = recipe.value1()
     k = 0
-    visited = []
 
     while True:
-        visited.append(recipe.quantities)
-        moves = {
-            score: recipe
-            for score, recipe in recipe.moves_dict().items()
-            if recipe.quantities not in visited
-        }
-        if kcal:
-            moves = {
-                value: move
-                for value, move in moves.items()
-                if move.feature_amount("calories") == kcal
-            }
+        moves = recipe.moves_dict()
         proposed_value = max(moves)
         if proposed_value < max_value:
             break
@@ -156,41 +145,33 @@ def part1(ingredients: Ingredients) -> int:
         "Chocolate": 36,
     }
 
-    recipe = find_recipe(ingredients, initial_quantities, verbose=True)
+    recipe = find_recipe(ingredients, initial_quantities, verbose=False)
     return recipe.value1()
 
 
-def five_hundred_calories(recipe: Recipe, verbose: bool = False) -> Recipe:
-    k = 0
-
-    min_dc = recipe.delta_c()
-    k = 0
-
-    while True:
-        moves = recipe.moves_dict2()
-        proposed_value = min(moves)
-        if proposed_value > min_dc:
-            break
-        recipe = moves[proposed_value]
-        min_dc = proposed_value
-        k += 1
-        if verbose:
-            print(f"Step {k}, value: {min_dc}")
-
-    return recipe
-
-
 def part2(ingredients: Ingredients) -> int:
-    initial_quantities = {
-        "Sugar": 25,
-        "Sprinkles": 25,
-        "Candy": 25,
-        "Chocolate": 25,
-    }
-    recipe = find_recipe(ingredients, initial_quantities, verbose=True)
-    recipe = five_hundred_calories(recipe, verbose=True)
-    # recipe = find_recipe(recipe, verbose=True, kcal=500, initial_recipe=recipe)
-    return recipe.value1(), recipe.delta_c()
+    # The constraint are strict enough that we can enumerate all
+    # possible recipes
+    cal = np.array([v["calories"] for v in ingredients.values.values()])
+
+    constraint_solutions = []
+    for a in range(101):
+        for b in range(101):
+            if a + b > 100:
+                continue
+            for c in range(101):
+                if (d := 100 - a - b - c) < 0:
+                    continue
+                q = np.array([a, b, c, d])
+                if cal @ q == 500:
+                    constraint_solutions.append(q)
+
+    # And evaluate them
+    constrained_max = max(
+        Recipe(ingredients, quantities=dict(zip(ingredients, q))).value1()
+        for q in constraint_solutions
+    )
+    return constrained_max
 
 
 def main() -> None:
