@@ -164,7 +164,7 @@ def part2() -> int:
 def main() -> None:
     print("Part 1: ")
     print("-------")
-    # print(part1())
+    print(part1())
     print("=======\n")
     print("Part 2: ")
     print("-------")
