@@ -55,10 +55,6 @@ def part2(passcode: str) -> str:
     return longest
 
 
-# 2439317 paths of length 60 - longest terminating path: 60
-#      t 0:00:35.820392
-
-
 def main() -> None:
     puzzle_input = "rrrbmfta"
     print("Part 1: ")
