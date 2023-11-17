@@ -30,3 +30,32 @@
 
 # There are two extra matched pairs on the first floor, adding
 # a total of 3 * 2 * 4 = 24 moves, so the total is 71.
+
+
+def part1(input: tuple[int, int, int, int]) -> int:
+    n = sum(input)
+    assert input[2] == input[3] == 0
+    first_to_second = 2 * (input[0] - 2) + 1
+    up_one_full_floor = 2 * (n - 2) + 1
+    return first_to_second + 2 * up_one_full_floor
+
+
+def part2(input: tuple[int, int, int, int]) -> int:
+    input = (input[0] + 4,) + input[1:]
+    return part1(input)
+
+
+def main() -> None:
+    items_in_floor = (8, 2, 0, 0)
+    print("Part 1: ")
+    print("-------")
+    print(part1(items_in_floor))
+    print("=======\n")
+    print("Part 2: ")
+    print("-------")
+    print(part2(items_in_floor))
+    print("=======\n")
+
+
+if __name__ == "__main__":
+    main()
