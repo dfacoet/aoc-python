@@ -40,8 +40,6 @@ class Bot:
 
 
 class DefaultDictKey(defaultdict):
-    default_factory: Callable[[], Any]
-
     def __missing__(self, key):
         self[key] = self.default_factory(key)
         return self[key]
