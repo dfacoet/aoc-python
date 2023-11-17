@@ -61,8 +61,6 @@ def part2(input: list[str]) -> int:
 
 
 def main() -> None:
-    start_time = datetime.now()
-
     input = read_input("2016-12_input.txt")
     print("Part 1: ")
     print("-------")
@@ -72,8 +70,6 @@ def main() -> None:
     print("-------")
     print(part2(input))
     print("=======\n")
-
-    print(f"Time: {datetime.now() - start_time}")
 
 
 if __name__ == "__main__":
