@@ -100,7 +100,7 @@ def generate_equipment(shop: dict[str, list[Item]]) -> ...:
             yield weapon, armor
 
 
-def part1(boss: Player, shop: ...) -> int:
+def part1(boss: Player, shop: dict[str, list[Item]]) -> int:
     return min(
         p.cost
         for items in generate_equipment(shop)
@@ -108,7 +108,7 @@ def part1(boss: Player, shop: ...) -> int:
     )
 
 
-def part2(boss: Player, shop: ...) -> ...:
+def part2(boss: Player, shop: dict[str, list[Item]]) -> int:
     return max(
         p.cost
         for items in generate_equipment(shop)
