@@ -3,7 +3,7 @@ def read_input(input_file) -> list[list[int]]:
         return [list(map(int, line.split())) for line in f.readlines()]
 
 
-def part1(puzzle_input: str) -> int:
+def part1(puzzle_input: list[list[int]]) -> int:
     return sum(max(row) - min(row) for row in puzzle_input)
 
 
@@ -13,9 +13,10 @@ def divide_row(row: list[int]) -> int:
         for b in numbers[i + 1 :]:
             if b % a == 0:
                 return b // a
+    raise ValueError("No divisible numbers found")
 
 
-def part2(puzzle_input: str) -> int:
+def part2(puzzle_input: list[list[int]]) -> int:
     return sum(divide_row(row) for row in puzzle_input)
 
 
