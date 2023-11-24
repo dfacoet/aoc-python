@@ -1,4 +1,5 @@
 import math
+from collections.abc import Iterator
 
 
 def read_input(input_file) -> int:
@@ -17,7 +18,7 @@ def part1(puzzle_input: int) -> int:
     return 2 * (k + 1) - min(r, 2 * k + 2 - r)
 
 
-def spiral_indices():
+def spiral_indices() -> Iterator[tuple[int, int]]:
     # yield 0, 0
     k = 0
     while True:
@@ -32,7 +33,7 @@ def spiral_indices():
             yield x, -k
 
 
-def neighbors(p):
+def neighbors(p: tuple[int, int]) -> Iterator[tuple[int, int]]:
     x, y = p
     for dx in range(-1, 2):
         for dy in range(-1, 2):
@@ -47,6 +48,7 @@ def part2(puzzle_input: int) -> int:
         if value > puzzle_input:
             return value
         values[p] = value
+    raise RuntimeError("No solution found")
 
 
 def main() -> None:
