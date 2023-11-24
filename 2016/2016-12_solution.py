@@ -1,23 +1,11 @@
-from collections import defaultdict
-from datetime import datetime
-
-
 def read_input(input_file) -> list[str]:
     with open(input_file, "r") as f:
         return f.read().splitlines()
 
 
-class DefaultDictKey(defaultdict):
-    def __missing__(self, key):
-        self[key] = self.default_factory(key)
-        return self[key]
-
-
 class Computer:
     def __init__(self) -> None:
         self.registers = dict.fromkeys("abcd", 0)
-        for key in "abcd":
-            self.registers[key] = 0
 
     def value(self, name: str) -> int:
         if name in "abcd":
@@ -35,7 +23,7 @@ class Computer:
                 self.registers[register] -= 1
             case ["jnz", origin, offset]:
                 if self.value(origin):
-                    return int(offset)
+                    return self.value(offset)
             case _:
                 raise ValueError(f"Invalid instruction {instruction}")
         return 1
