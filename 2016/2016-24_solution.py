@@ -9,9 +9,6 @@ def read_input(input_file) -> list[str]:
         return f.read().splitlines()
 
 
-import math
-
-
 class Maze:
     def __init__(self, map: list[str]) -> None:
         self.map = [[int(c == "#") for c in line] for line in map]

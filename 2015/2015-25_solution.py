@@ -26,9 +26,6 @@ def part1(row: int, col: int) -> int:
     return code
 
 
-# 21653676 too high
-
-
 def part2(row: int, col: int) -> int:
     ...
 
