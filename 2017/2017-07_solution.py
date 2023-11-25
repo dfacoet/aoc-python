@@ -2,7 +2,6 @@ from collections import Counter
 from collections.abc import Iterator
 from dataclasses import dataclass, field
 from functools import cached_property
-from itertools import groupby
 
 
 def read_input(input_file) -> list[str]:
@@ -11,8 +10,8 @@ def read_input(input_file) -> list[str]:
 
 
 def part1(puzzle_input: list[str]) -> str:
-    parents = set()
-    children = set()
+    parents: set[str] = set()
+    children: set[str] = set()
     for line in puzzle_input:
         match line.split():
             case [name, _]:
@@ -50,13 +49,12 @@ def weight_key(p: Program) -> int:
     return p.total_weight
 
 
-def part2(puzzle_input: list[str]) -> str:
-    programs = {}
+def part2(puzzle_input: list[str]) -> int:
+    programs: dict[str, Program] = {}
     for line in puzzle_input:
         match line.split():
             case [name, weight]:
-                children_names = []
-                programs[name] = Program(name, int(weight[1:-1]), [], programs)
+                children_names: list[str] = []
             case [name, weight, "->", *children_names]:
                 children_names = [c.rstrip(",") for c in children_names]
             case _:
@@ -78,6 +76,8 @@ def part2(puzzle_input: list[str]) -> str:
                 if c.total_weight == unbalanced_weight
             )
             return unbalanced_program_weight + correction
+
+    raise ValueError("No unbalanced program found")
 
 
 def main() -> None:
