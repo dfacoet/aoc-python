@@ -31,9 +31,6 @@ def letters_to_digits(s: str) -> str:
     while i < len(s):
         for n, d in enumerate(spelled_digits):
             if s[i:].startswith(d):
-                print(
-                    f"Found {d}, replacing with {n + 1} and skipping {len(d)}"
-                )
                 digits_string += str(n + 1)
                 break
         else:
@@ -48,13 +45,6 @@ def part2(puzzle_input: list[str]) -> int:
 
 def main() -> None:
     puzzle_input = read_input("2023-01_input.txt")
-
-    print("TEST")
-    for s in puzzle_input:
-        print(
-            f"{s} -> {letters_to_digits(s)} -> {calibration_value(letters_to_digits(s))}"
-        )
-
     print("Part 1: ")
     print("-------")
     print(part1(puzzle_input))
