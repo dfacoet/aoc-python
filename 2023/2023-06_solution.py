@@ -27,12 +27,10 @@ def part1(puzzle_input: list[tuple[int, int]]) -> int:
     return prod(count_ways(*t) for t in puzzle_input)
 
 
-def reparse(numbers: list[int]) -> int:
-    return int("".join(map(str, numbers)))
-
-
 def part2(puzzle_input: list[tuple[int, int]]) -> int:
-    time, distance = map(reparse, zip(*puzzle_input))
+    time, distance = (
+        int("".join(map(str, numbers))) for numbers in zip(*puzzle_input)
+    )
     return count_ways(time, distance)
 
 
