@@ -26,12 +26,12 @@ class Engine:
             i = 0
             while i < len(row):
                 if row[i].isdigit():
-                    l = 1
-                    while i + l < len(row) and row[i + l].isdigit():
-                        l += 1
+                    length = 1
+                    while i + length < len(row) and row[i + length].isdigit():
+                        length += 1
                     # number, coordinates of first digit, length
-                    yield int(row[i : i + l]), (i, y), l
-                    i += l
+                    yield int(row[i : i + length]), (i, y), length
+                    i += length
                 else:
                     i += 1
 
