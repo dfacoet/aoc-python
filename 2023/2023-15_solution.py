@@ -12,7 +12,7 @@ def hash(s: str) -> int:
 
 class Boxes:
     def __init__(self, n: int) -> None:
-        self.boxes = [{} for _ in range(n)]
+        self.boxes: list[dict[str, int]] = [{} for _ in range(n)]
 
     def run_instruction(self, instruction: str) -> None:
         if instruction.endswith("-"):
@@ -39,7 +39,7 @@ def part1(puzzle_input: list[str]) -> int:
     return sum(hash(s) for s in puzzle_input)
 
 
-def part2(puzzle_input: list[str]) -> ...:
+def part2(puzzle_input: list[str]) -> int:
     boxes = Boxes(256)
     boxes.run(puzzle_input)
     return boxes.power()
