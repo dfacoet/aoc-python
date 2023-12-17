@@ -129,7 +129,6 @@ def part2(puzzle_input: list[str]) -> int:
 
 def main() -> None:
     puzzle_input = read_input("2023-16_input.txt")
-    # puzzle_input = read_input("2023-16_sample.txt")
     print("Part 1: ")
     print("-------")
     print(part1(puzzle_input))
