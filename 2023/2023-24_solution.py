@@ -1,7 +1,7 @@
+from dataclasses import dataclass
 from functools import cached_property
 
 import numpy as np
-from attr import dataclass
 from scipy import optimize
 
 
